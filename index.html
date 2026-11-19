@@ -48,12 +48,13 @@
     .chat-container::-webkit-scrollbar-thumb { background: #1f2a3a; border-radius: 20px; }
 
     /* Message Bubbles */
-    .message { display: flex; max-width: 90%; animation: fadeIn 0.2s ease; }
-    .message.user { align-self: flex-end; justify-content: flex-end; }
-    .message.bot { align-self: flex-start; justify-content: flex-start; }
+    .message { display: block; max-width: 85%; animation: fadeIn 0.2s ease; }
+    .message.user { align-self: flex-end; text-align:right;margin-left: auto; }
+    .message.bot { align-self: flex-start; text-align:left; margin-right:auto; }
     .bubble {
+      display: inline-block;text-align:left;
       padding: 12px 18px; border-radius: 20px; font-size: 15px;
-      line-height: 1.5; word-break: break-word; white-space: pre-wrap;
+      line-height: 1.5; word-break:normal;overflow-wrap: break-word; white-space: pre-wrap;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     .user .bubble {
