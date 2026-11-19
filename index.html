@@ -14,7 +14,7 @@ body {
   color: #eef2f8;
   display: flex;
   flex-direction: column;
-  height: 100dvh;
+  height: 100svh;
   overflow: hidden;
 }
     /* Top Logo */
@@ -426,12 +426,18 @@ body {
       userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') { e.preventDefault(); handleSend(); }
       });
+      userInput.addEventListener('focus', () => {
+  setTimeout(() => {
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }, 300);
 
-      window.addEventListener('load', () => {
-        addMessage('Hello! I am XENOVA AI. I remember our conversation, answer clearly, and keep code intact. Ask me anything.', 'bot');
-      });
+window.addEventListener('load', () => {
 
-    })();
+window.addEventListener('load', () => {
+  addMessage('Hello! I am XENOVA AI. I remember our conversati
+});
+
+})();
   </script>
 </body>
 </html>
