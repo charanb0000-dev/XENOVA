@@ -6,154 +6,83 @@
   <title>XENOVA AI</title>
   <style>
     /* Premium Dark Theme */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
       background: #0b0f17;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       color: #eef2f8;
       display: flex;
       flex-direction: column;
-      height: 100dvh; /* FIXED: 100dvh prevents mobile keyboard from hiding input */
+      height: 100dvh; /* FIXED: Prevents mobile keyboard from hiding input */
       overflow: hidden;
     }
 
     /* Top Logo */
     .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px 16px 10px;
-      background: #0b0f17;
-      border-bottom: 1px solid #1e2a3a;
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      padding: 18px 16px 10px; background: #0b0f17;
+      border-bottom: 1px solid #1e2a3a; flex-shrink: 0;
     }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
+    .logo { display: flex; align-items: center; gap: 10px; }
     .logo-icon {
       background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 700;
-      color: #ffffff;
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 700; color: #ffffff;
       box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
     }
-
     .logo-text {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
+      font-size: 22px; font-weight: 700; letter-spacing: -0.5px;
       background: linear-gradient(135deg, #eef2f8, #b0c4de);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
     /* Chat Area */
     .chat-container {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px 16px 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      scroll-behavior: smooth;
-      background: #0b0f17;
+      flex: 1; overflow-y: auto; padding: 16px 16px 8px;
+      display: flex; flex-direction: column; gap: 14px;
+      scroll-behavior: smooth; background: #0b0f17;
     }
-
-    .chat-container::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .chat-container::-webkit-scrollbar-thumb {
-      background: #1f2a3a;
-      border-radius: 20px;
-    }
+    .chat-container::-webkit-scrollbar { width: 5px; }
+    .chat-container::-webkit-scrollbar-thumb { background: #1f2a3a; border-radius: 20px; }
 
     /* Message Bubbles */
-    .message {
-      display: flex;
-      max-width: 90%;
-      animation: fadeIn 0.2s ease;
-    }
-
-    .message.user {
-      align-self: flex-end;
-      justify-content: flex-end;
-    }
-
-    .message.bot {
-      align-self: flex-start;
-      justify-content: flex-start;
-    }
-
+    .message { display: flex; max-width: 90%; animation: fadeIn 0.2s ease; }
+    .message.user { align-self: flex-end; justify-content: flex-end; }
+    .message.bot { align-self: flex-start; justify-content: flex-start; }
     .bubble {
-      padding: 12px 18px;
-      border-radius: 20px;
-      font-size: 15px;
-      line-height: 1.5;
-      word-break: break-word;
-      white-space: pre-wrap;
+      padding: 12px 18px; border-radius: 20px; font-size: 15px;
+      line-height: 1.5; word-break: break-word; white-space: pre-wrap;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
-
     .user .bubble {
       background: linear-gradient(135deg, #2563eb, #4f46e5);
-      color: #ffffff;
-      border-bottom-right-radius: 6px;
+      color: #ffffff; border-bottom-right-radius: 6px;
     }
-
     .bot .bubble {
-      background: #1a2332;
-      color: #e2e8f0;
-      border-bottom-left-radius: 6px;
-      border: 1px solid #2a3a4e;
+      background: #1a2332; color: #e2e8f0;
+      border-bottom-left-radius: 6px; border: 1px solid #2a3a4e;
     }
 
     /* Typing indicator */
     .typing-indicator {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 14px 20px;
-      background: #1a2332;
-      border-radius: 20px;
-      border-bottom-left-radius: 6px;
-      border: 1px solid #2a3a4e;
-      width: fit-content;
+      display: flex; align-items: center; gap: 6px;
+      padding: 14px 20px; background: #1a2332;
+      border-radius: 20px; border-bottom-left-radius: 6px;
+      border: 1px solid #2a3a4e; width: fit-content;
     }
-
     .typing-indicator span {
-      width: 8px;
-      height: 8px;
-      background: #5f7d9c;
-      border-radius: 50%;
-      display: inline-block;
+      width: 8px; height: 8px; background: #5f7d9c;
+      border-radius: 50%; display: inline-block;
       animation: bounce 1.2s infinite ease-in-out;
     }
-
     .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
     .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
     @keyframes bounce {
       0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
       30% { transform: translateY(-6px); opacity: 1; }
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
@@ -161,71 +90,30 @@
 
     /* Input Area */
     .input-area {
-      flex-shrink: 0;
-      padding: 12px 16px 18px;
-      background: #0b0f17;
-      border-top: 1px solid #1e2a3a;
+      flex-shrink: 0; padding: 12px 16px 18px;
+      background: #0b0f17; border-top: 1px solid #1e2a3a;
     }
-
     .input-wrapper {
-      display: flex;
-      align-items: center;
-      background: #141c26;
-      border-radius: 32px;
-      padding: 4px 4px 4px 18px;
-      border: 1px solid #253242;
-      transition: border 0.2s;
+      display: flex; align-items: center; background: #141c26;
+      border-radius: 32px; padding: 4px 4px 4px 18px;
+      border: 1px solid #253242; transition: border 0.2s;
     }
-
-    .input-wrapper:focus-within {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-    }
-
+    .input-wrapper:focus-within { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); }
     .input-wrapper input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #eef2f8;
-      font-size: 16px;
-      padding: 12px 0;
-      font-family: inherit;
+      flex: 1; background: transparent; border: none; outline: none;
+      color: #eef2f8; font-size: 16px; padding: 12px 0; font-family: inherit;
     }
-
-    .input-wrapper input::placeholder {
-      color: #5e7188;
-    }
-
+    .input-wrapper input::placeholder { color: #5e7188; }
     .input-wrapper button {
       background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      border: none;
-      color: white;
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 20px;
-      transition: opacity 0.2s, transform 0.1s;
-      flex-shrink: 0;
+      border: none; color: white; width: 46px; height: 46px;
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; cursor: pointer; font-size: 20px;
+      transition: opacity 0.2s, transform 0.1s; flex-shrink: 0;
     }
-
-    .input-wrapper button:hover {
-      opacity: 0.9;
-    }
-
-    .input-wrapper button:active {
-      transform: scale(0.94);
-    }
-
-    .input-wrapper button:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      transform: none;
-    }
+    .input-wrapper button:hover { opacity: 0.9; }
+    .input-wrapper button:active { transform: scale(0.94); }
+    .input-wrapper button:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
     /* Mobile friendly */
     @media (max-width: 600px) {
@@ -251,9 +139,7 @@
   </div>
 
   <!-- Chat Area -->
-  <div class="chat-container" id="chatContainer">
-    <!-- Messages injected by JS -->
-  </div>
+  <div class="chat-container" id="chatContainer"></div>
 
   <!-- Input Area -->
   <div class="input-area">
@@ -266,21 +152,17 @@
   <script>
     (function() {
       // ============================================================
-      // 🔑 PASTE YOUR GEMINI API KEYS HERE
+      // 🔑 PASTE YOUR SINGLE GEMINI API KEY HERE
       // ============================================================
       const GEMINI_KEYS = [
-        "AQ.Ab8RN6KnyHbFczsIS1sjt7r9wfug9TQz1tL3g2POlIHsjVr1Kg",
-        "AQ.Ab8RN6JavdoIOx95fjoFljXRj-Qc8lqBB98aczL36L3UPTQzWQ",
-        "AQ.Ab8RN6KySnGCx7yk0bi3DB8FXupFbNxbckGiola0VVKiiqfoxA",
-        "AQ.Ab8RN6JR4QMPO3MZ2G-1yOiPMrL61FoF3uM5LIK33PMJdUatxA",
-        "AQ.Ab8RN6JM-ifg5xTCnJGSP0JQtJy6DhkYhoKH4huEFMOmwHMY7w"
+        "AQ.Ab8RN6KnyHbFczsIS1sjt7r9wfug9TQz1tL3g2POlIHsjVr1Kg"
       ];
       // ============================================================
 
-      // FIXED: Removed 3.8 Flash as requested
+      // Stable models
       const MODELS = [
-        "gemini-2.5-flash",        // primary: best free balance of accuracy
-        "gemini-2.0-flash"         // secondary: fast, but daily quota is lower
+        "gemini-2.5-flash",        
+        "gemini-2.0-flash"         
       ];
 
       const chatContainer = document.getElementById('chatContainer');
@@ -288,7 +170,7 @@
       const sendBtn = document.getElementById('sendBtn');
 
       // --- Conversation memory ---
-      const conversationHistory = []; // { role: 'user' | 'assistant', content: string }
+      const conversationHistory = []; 
 
       // Helper: add message to UI
       function addMessage(text, sender) {
@@ -317,22 +199,20 @@
         return msgDiv;
       }
 
-      // Remove typing indicator
       function removeTyping() {
         const el = document.getElementById('typingIndicator');
         if (el) el.remove();
       }
 
       // ============================================================
-      // CLEAN ANSWER — removes markdown/emojis but PRESERVES
-      // code blocks, tables, and structured formatting.
+      // CLEAN ANSWER — preserves code blocks, fixes hyphen bug
       // ============================================================
       function cleanAnswer(text) {
         if (!text) return '';
 
         let cleaned = text;
 
-        // 1. Remove emojis (unicode ranges)
+        // 1. Remove emojis
         cleaned = cleaned.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE0F}\u{200D}\u{20E3}\u{1F900}-\u{1F9FF}\u{1FA70}-\u{1FAFF}\u{1F018}-\u{1F0FF}]/gu, '');
 
         // 2. PRESERVE code blocks
@@ -351,75 +231,54 @@
           return placeholder;
         });
 
-        // 4. Remove markdown links: [text](url) -> text
+        // 4. Remove markdown links
         cleaned = cleaned.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-
         // 5. Remove raw URLs
         cleaned = cleaned.replace(/https?:\/\/[^\s]+/g, '');
-
-        // 6. Remove markdown bold/italic
+        // 6. Remove bold/italic
         cleaned = cleaned.replace(/\*\*(.*?)\*\*/g, '$1');
         cleaned = cleaned.replace(/\*(.*?)\*/g, '$1');
         cleaned = cleaned.replace(/__(.*?)__/g, '$1');
         cleaned = cleaned.replace(/_(.*?)_/g, '$1');
-
-        // 7. Remove markdown headings
+        // 7. Remove headings
         cleaned = cleaned.replace(/^#{1,6}\s+/gm, '');
-
-        // 8. Remove bullet points and numbered lists
+        // 8. Remove bullet points/lists
         cleaned = cleaned.replace(/^\s*[-*+•]\s+/gm, '');
         cleaned = cleaned.replace(/^\s*\d+\.\s+/gm, '');
-
         // 9. Remove horizontal rules
         cleaned = cleaned.replace(/^\s*[-*_]{3,}\s*$/gm, '');
-
-        // 10. Remove remaining hashtags
+        // 10. Remove hashtags
         cleaned = cleaned.replace(/#[A-Za-z0-9_]+/g, '');
-
-        // 11. Remove any remaining asterisks or hashes
+        // 11. Remove remaining asterisks/hashes
         cleaned = cleaned.replace(/[*#]/g, '');
 
-        // 12. FIXED: Only remove standalone spacing dashes, preserve hyphenated words
+        // 12. Only remove standalone spacing dashes, preserve hyphenated words
         cleaned = cleaned.replace(/\s+-\s+/g, ' ');
         cleaned = cleaned.replace(/^-\s+/gm, '');
 
-        // 13. Restore code blocks and inline code
-        inlineCode.forEach((code, i) => {
-          cleaned = cleaned.replace(`__INLINE_CODE_${i}__`, code);
-        });
-        codeBlocks.forEach((code, i) => {
-          cleaned = cleaned.replace(`__CODE_BLOCK_${i}__`, code);
-        });
+        // 13. Restore code
+        inlineCode.forEach((code, i) => { cleaned = cleaned.replace(`__INLINE_CODE_${i}__`, code); });
+        codeBlocks.forEach((code, i) => { cleaned = cleaned.replace(`__CODE_BLOCK_${i}__`, code); });
 
-        // 14. Normalize spaces and newlines
+        // 14. Normalize spacing
         cleaned = cleaned.replace(/[ \t]+/g, ' ');
         cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
         cleaned = cleaned.trim();
 
-        // 15. Ensure each point on a new line
         const lines = cleaned.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-
         if (lines.length === 0) return '';
 
         let result = lines.join('\n');
-
-        // 16. End with 1 line tip
         const tipText = 'Tip: Ask follow-up questions to explore deeper.';
         const lastLine = lines[lines.length - 1] || '';
-        if (!/^tip:/i.test(lastLine)) {
-          result += '\n' + tipText;
-        }
+        if (!/^tip:/i.test(lastLine)) result += '\n' + tipText;
 
         return result;
       }
 
-      // ============================================================
-      // BUILD GEMINI PAYLOAD WITH CONVERSATION HISTORY
-      // ============================================================
+      // Build history payload
       function buildGeminiContents(userMessage) {
         const contents = [];
-
-        // Add previous history (limit to last 20 messages)
         const recentHistory = conversationHistory.slice(-20);
         for (const turn of recentHistory) {
           contents.push({
@@ -427,58 +286,40 @@
             parts: [{ text: turn.content }]
           });
         }
-
-        // Add the current user message
-        contents.push({
-          role: 'user',
-          parts: [{ text: userMessage }]
-        });
-
+        contents.push({ role: 'user', parts: [{ text: userMessage }] });
         return contents;
       }
 
       // ============================================================
-      // TRY GEMINI WITH MULTIPLE KEYS AND MODELS
+      // CALL GEMINI (WITH SINGLE KEY)
       // ============================================================
       async function callGemini(userMessage) {
         const contents = buildGeminiContents(userMessage);
 
-        // Try each model
         for (let modelIdx = 0; modelIdx < MODELS.length; modelIdx++) {
           const model = MODELS[modelIdx];
 
-          // Try each key
+          // Only one key now, but keeping the loop for easy expansion later
           for (let keyIdx = 0; keyIdx < GEMINI_KEYS.length; keyIdx++) {
             const apiKey = GEMINI_KEYS[keyIdx];
-            if (!apiKey || apiKey.includes('YOUR_')) continue; // skip placeholder
+            if (!apiKey || apiKey.includes('YOUR_')) continue;
 
             try {
               const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-              const body = { contents };
-
               const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
+                body: JSON.stringify({ contents })
               });
 
-              if (response.status === 429) {
-                console.warn(`429 on ${model} with key ${keyIdx}, trying next...`);
-                continue;
-              }
-
-              if (!response.ok) {
-                console.warn(`Error ${response.status} on ${model} with key ${keyIdx}`);
-                continue;
-              }
+              if (response.status === 429) { continue; }
+              if (!response.ok) { continue; }
 
               const data = await response.json();
               const candidateText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-              if (candidateText) {
-                return candidateText;
-              }
+              if (candidateText) return candidateText;
             } catch (err) {
-              console.warn(`Fetch error on ${model} with key ${keyIdx}:`, err);
+              // Try next model on network error
             }
           }
         }
@@ -486,18 +327,34 @@
       }
 
       // ============================================================
-      // BACKUP: pollinations.ai (FIXED: sends only single message)
+      // BACKUP: Pollinations
       // ============================================================
       async function callBackup(userMessage) {
         try {
-          // FIXED: Just send the raw message, no messy context history
-          const response = await fetch('https://text.pollinations.ai/' + encodeURIComponent(userMessage));
+          const url = 'https://gen.pollinations.ai/v1/chat/completions';
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              model: 'openai', 
+              messages: [{ role: 'user', content: userMessage }]
+            })
+          });
+
           if (response.ok) {
-            const text = await response.text();
-            if (text && text.trim().length > 0) {
-              return text.trim();
-            }
+            const data = await response.json();
+            const text = data?.choices?.[0]?.message?.content;
+            if (text && text.trim().length > 0) return text.trim();
           }
+
+          // Fallback to simple GET route
+          const fallbackUrl = 'https://gen.pollinations.ai/text/' + encodeURIComponent(userMessage);
+          const fallbackResp = await fetch(fallbackUrl);
+          if (fallbackResp.ok) {
+            const fallbackText = await fallbackResp.text();
+            if (fallbackText && fallbackText.trim().length > 0) return fallbackText.trim();
+          }
+
           return null;
         } catch (err) {
           console.error('Backup failed:', err);
@@ -517,7 +374,6 @@
 
         addMessage(message, 'user');
         userInput.value = '';
-
         addTyping();
 
         let rawAnswer = null;
@@ -526,16 +382,15 @@
         try {
           rawAnswer = await callGemini(message);
         } catch (e) {
-          console.warn('Gemini call exception:', e);
+          console.warn('Gemini exception:', e);
         }
 
-        // 2. If Gemini failed, try backup
+        // 2. Try Backup
         if (!rawAnswer) {
-          console.log('Gemini failed, using backup...');
           try {
             rawAnswer = await callBackup(message);
           } catch (e) {
-            console.warn('Backup call exception:', e);
+            console.warn('Backup exception:', e);
           }
         }
 
@@ -550,9 +405,9 @@
         removeTyping();
         addMessage(finalAnswer, 'bot');
 
-        // FIXED: Save the RAW answer to history so the AI remembers its code formatting
+        // Save RAW answer to history so the AI retains its formatting context
         conversationHistory.push({ role: 'user', content: message });
-        conversationHistory.push({ role: 'assistant', content: rawAnswer }); 
+        conversationHistory.push({ role: 'assistant', content: rawAnswer });
 
         if (conversationHistory.length > 40) {
           conversationHistory.splice(0, conversationHistory.length - 40);
@@ -567,15 +422,10 @@
       // EVENT LISTENERS
       // ============================================================
       sendBtn.addEventListener('click', handleSend);
-
       userInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          handleSend();
-        }
+        if (e.key === 'Enter') { e.preventDefault(); handleSend(); }
       });
 
-      // Welcome message
       window.addEventListener('load', () => {
         addMessage('Hello! I am XENOVA AI. I remember our conversation, answer clearly, and keep code intact. Ask me anything.', 'bot');
       });
