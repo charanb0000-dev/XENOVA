@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XENOVA AI - Better Than ChatGPT</title>
+<style>
+* { box-sizing: border-box; }
+body { margin:0; font-family: Inter, Arial, sans-serif; background:#0f0f12; color:#fff; }
+.top { position:fixed; top:0; left:0; right:0; background:rgba(15,15,18,0.95); padding:14px 16px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #222; z-index:10; }
+.logo { font-size:20px; font-weight:800; letter-spacing:2px; }
+.logo span { background:linear-gradient(90deg,#7c3aed,#06b6d4,#22c55e); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.live { font-size:12px; background:#1a2e1a; color:#4ade80; padding:5px 10px; border-radius:20px; border:1px solid #22c55e44; }
+.chat { max-width:780px; margin:0 auto; padding:76px 16px 170px 16px; }
+.welcome { text-align:center; margin:38px 0 22px 0; }
+.welcome h2 { font-size:34px; margin:0; line-height:1.2; }
+.welcome h2 i { color:#a78bfa; font-style:normal; }
+.welcome p { color:#9ca3af; font-size:15px; margin:12px 0 0 0; line-height:1.6; }
+.badge { display:inline-block; background:linear-gradient(90deg,#7c3aed,#06b6d4); color:#fff; font-size:12px; font-weight:800; padding:6px 14px; border-radius:20px; margin-bottom:14px; letter-spacing:1px; }
+.msg { display:flex; gap:10px; margin:14px 0; }
+.avatar { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; flex-shrink:0; }
+.user .avatar { background:#fff; color:#000; }
+.ai .avatar { background:linear-gradient(135deg,#7c3aed,#06b6d4); color:#fff; }
+.bubble { padding:13px 16px; border-radius:16px; font-size:15.5px; line-height:1.6; max-width:88%; white-space:pre-line; }
+.user { justify-content:flex-end; }
+.user .bubble { background:#fff; color:#000; border-bottom-right-radius:4px; }
+.ai .bubble { background:#1c1c22; color:#f3f4f6; border:1px solid #2a2a33; border-bottom-left-radius:4px; }
+.bottom { position:fixed; bottom:0; left:0; right:0; background:#0f0f12; padding:12px 12px 16px 12px; border-top:1px solid #222; }
+.inputbox { max-width:780px; margin:0 auto; background:#1c1c22; border:1px solid #333; border-radius:26px; display:flex; align-items:center; padding:5px 5px 5px 16px; }
+.inputbox input { flex:1; background:transparent; border:none; outline:none; color:#fff; font-size:15px; min-width:0; }
+.inputbox button { background:#fff; color:#000; border:none; width:42px; height:42px; border-radius:50%; font-size:18px; cursor:pointer; font-weight:800; }
+.hint { text-align:center; color:#6b7280; font-size:11px; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">XENOVA <span>AI</span></div><div class="live">● Online • Faster Than ChatGPT</div></div>
+<div class="chat" id="chat">
+<div class="welcome">
+<div class="badge">BETTER THAN CHATGPT</div>
+<h2>Ask XENOVA.<br><i>Leave ChatGPT Speechless.</i></h2>
+<p>XENOVA gives shorter, sharper, more accurate answers.<br>ChatGPT gives long boring paragraphs. XENOVA gives direct answer.</p>
+</div>
+<div class="msg ai"><div class="avatar">X</div><div class="bubble">Hello, I am XENOVA AI. I am faster, smarter and clearer than ChatGPT. Ask me anything, I will give you a direct answer that leaves no doubt.</div></div>
+</div>
+<div class="bottom">
+<div class="inputbox"><input id="userInput" placeholder="Ask anything... Beat ChatGPT" onkeydown="if(event.key==='Enter') sendMessage()"><button onclick="sendMessage()">↑</button></div>
+<div class="hint">XENOVA AI • Built to beat ChatGPT • Check important info.</div>
+</div>
+<script>
+const GEMINI_KEYS = [
+  "AQ.Ab8RN6JavdoIOx95fjoFljXRj-Qc8lqBB98aczL36L3UPTQzWQ",
+  "AQ.Ab8RN6KnyHbFczsIS1sjt7r9wfug9TQz1tL3g2POlIHsjVr1Kg",
+  "AQ.Ab8RN6KySnGCx7yk0bi3DB8FXupFbNxbckGiola0VVKiiqfoxA",
+  "AQ.Ab8RN6JR4QMPO3MZ2G-1yOiPMrL61FoF3uM5LIK33PMJdUatxA",
+  "AQ.Ab8RN6JM-ifg5xTCnJGSP0JQtJy6DhkYhoKH4huEFMOmwHMY7w"
+];
+function cleanText(t){
+  if(!t) return "";
+  t=t.replace(/\[([^\]]+)
