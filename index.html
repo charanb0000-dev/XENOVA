@@ -6,8 +6,9 @@
 <title>XENOVA AI</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
-body{background:#0a0a0f;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:8px}
-.app{width:100%;max-width:900px;height:100vh;max-height:900px;background:#111118;border-radius:32px;display:flex;flex-direction:column;box-shadow:0 25px 50px -12px rgba(0,0,0,0.8);border:1px solid #1e1e2a;overflow:hidden}
+html,body{height:100dvh;overflow:hidden}
+body{background:#0a0a0f;display:flex;justify-content:center;align-items:center;min-height:100dvh;padding:0px;margin:0px;overflow:hidden}
+.app{width:100%;max-width:900px;height:100dvh;max-height:100dvh;background:#111118;border-radius:0px;display:flex;flex-direction:column;border:1px solid #1e1e2a;overflow:hidden}
 .header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1e1e2a;flex-shrink:0}
 .logo{display:flex;align-items:center;gap:10px}
 .logo-icon{width:32px;height:32px;background:linear-gradient(135deg,#6d5dfc,#b25dfc);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:white}
@@ -28,7 +29,7 @@ body{background:#0a0a0f;display:flex;justify-content:center;align-items:center;m
 .typing span{width:7px;height:7px;background:#6d5dfc;border-radius:50%;animation:bounce 1.4s infinite ease-in-out}
 .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
 @keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-6px);opacity:1}}
-.input-area{padding:12px 16px 18px;background:#111118;border-top:1px solid #1e1e2a;flex-shrink:0}
+.input-area{padding:12px 16px 18px;background:#111118;border-top:1px solid #1e1e2a;flex-shrink:0;padding-bottom:calc(18px + env(safe-area-inset-bottom))}
 .input-wrap{display:flex;gap:10px;align-items:flex-end;background:#1a1a24;border-radius:28px;padding:6px 6px 6px 20px;border:1px solid #2a2a3a}
 .input-wrap:focus-within{border-color:#6d5dfc}
 .input-wrap textarea{flex:1;background:transparent;border:none;outline:none;color:#e4e4f0;font-size:15px;resize:none;padding:8px 0;max-height:120px;line-height:1.5;font-family:inherit}
@@ -37,7 +38,7 @@ body{background:#0a0a0f;display:flex;justify-content:center;align-items:center;m
 .send-btn:disabled{opacity:.4;cursor:not-allowed}
 .send-btn svg{width:20px;height:20px;fill:white}
 .footer-note{text-align:center;font-size:11px;color:#4a4a5a;margin-top:8px}
-@media(max-width:600px){.app{border-radius:0;max-height:100vh;border:none}.bubble{max-width:85%;font-size:14px}.chat-area{padding:16px 14px}}
+@media(max-width:600px){.app{border-radius:0;border:none}.bubble{max-width:85%;font-size:14px}.chat-area{padding:16px 14px}}
 </style>
 </head>
 <body>
@@ -47,7 +48,7 @@ body{background:#0a0a0f;display:flex;justify-content:center;align-items:center;m
 <div class="input-area"><div class="input-wrap"><textarea id="userInput" rows="1" placeholder="Ask anything..." autofocus></textarea><button class="send-btn" id="sendBtn"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button></div><div class="footer-note">XENOVA AI · fast · clean · reliable</div></div>
 </div>
 <script>
-const GEMINI_KEYS = ["AQ.Ab8RN6KnyHbFczsIS1sjt7r9wfug9TQz1tL3g2POlIHsjVr1Kg","AQ.Ab8RN6JavdoIOx95fjoFljXRj-Qc8lqBB98aczL36L3UPTQzWQ","AQ.Ab8RN6KySnGCx7yk0bi3DB8FXupFbNxbckGiola0VVKiiqfoxA"];
+const GEMINI_KEYS = ["AQ.Ab8RN6KnyHbFczsIS1sjt7r9wfug9TQz1tL3g2POlIHsjVr1Kg","AQ.Ab8RN6JavdoIOx95fjoFljXRj-Qc8lqBB98aczL36L3UPTQzWQ","AQ.Ab8RN6JR4QMPO3MZ2G-1yOiPMrL61FoF3uM5LIK33PMJdUatxA"];
 const MODELS = ["gemini-2.0-flash","gemini-1.5-flash"];
 const BACKUP_URL = "https://text.pollinations.ai/";
 const chatArea = document.getElementById('chatArea');
