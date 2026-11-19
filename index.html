@@ -426,18 +426,19 @@ body {
       userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') { e.preventDefault(); handleSend(); }
       });
-      userInput.addEventListener('focus', () => {
-  setTimeout(() => {
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-  }, 300);
+ userInput.addEventListener('focus', () => {
+ setTimeout(() => {
+   chatContainer.scrollTop = chatContainer.scrollHeight;
+ }, 300);
+ });
 
-window.addEventListener('load', () => {
 
-window.addEventListener('load', () => {
-  addMessage('Hello! I am XENOVA AI. I remember our conversati
-});
+ window.addEventListener('load', () => {
+   addMessage('Hello! I am XENOVA AI. I remember our conversation...', 'bot');
+ });
 
-})();
-  </script>
+
+ })();
+ </script>  
 </body>
 </html>
